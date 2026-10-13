@@ -13,20 +13,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v7
         
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
+       # 2. Setup the Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: '20' # Specify your preferred Node version
+          cache: 'npm'       # Automatically caches npm dependencies
 
-      # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
+      # 3. Install project dependencies cleanly
+      - name: Install dependencies
         run: npm ci
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v3
-        with:
-          eslint: true
-          prettier: true
+      # 4. Run the linter script defined in package.json
+      - name: Run ESLint
+        run: npm run lint
       
   build-and-push:
     needs: [code-lint]
