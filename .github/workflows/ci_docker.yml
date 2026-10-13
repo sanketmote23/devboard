@@ -10,17 +10,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Docker Hub username
-        run: |
-          if [ -z "$DOCKERHUB_USERNAME" ]; then
-            echo "Docker Hub username is missing"
-            exit 1
-          else
-            echo "Docker Hub username is configured"
-          fi
-        env:
-          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          
+             
       - name: Checkout Code
         uses: actions/checkout@v7
 
